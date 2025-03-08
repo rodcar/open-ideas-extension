@@ -51,6 +51,13 @@ function loadCurrentIdeas() {
     window.dispatchEvent(new Event('load'));
 }
 
+function animateLikeButton(button) {
+    button.classList.add('animate-like');
+    setTimeout(() => {
+        button.classList.remove('animate-like');
+    }, 500); // Duration of the animation
+}
+
 window.addEventListener('load', async () => {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     const url = encodeURIComponent(tab.url);
@@ -78,11 +85,15 @@ window.addEventListener('load', async () => {
           <p class="text-gray-700 mb-2">${item.description}</p>
           <p class="text-gray-700 mb-2"><strong>Técnica:</strong> ${item.technique}</p>
           <p class="text-gray-700 mb-2"><strong>Columnas:</strong> ${highlightCapsWords(item.columns)}</p>
-          <button class="like-button absolute top-2 right-2 bg-blue-500 text-white w-10 h-10 rounded-full flex items-center justify-center">
+          <button class="like-button absolute top-2 right-2 border border-gray-500 text-gray-500 w-10 h-10 rounded-full flex items-center justify-center">
             <i class="fa-solid fa-thumbs-up"></i>
           </button>
         `;
-        card.querySelector('.like-button').addEventListener('click', () => saveIdea(item));
+        const likeButton = card.querySelector('.like-button');
+        likeButton.addEventListener('click', () => {
+            saveIdea(item);
+            animateLikeButton(likeButton);
+        });
         ideasList.appendChild(card);
       });
 
