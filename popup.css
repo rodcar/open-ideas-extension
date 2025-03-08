@@ -35,11 +35,11 @@ body {
   }
 
   .animate-expand.delay-1 {
-    animation-delay: 0.7s;
+    animation-delay: 0.4s;
     width: 0.4ch;
   }
 
   .animate-expand-2.delay-1 {
-    animation-delay: 0.7s;
+    animation-delay: 0.4s;
     width: 0.87ch;
   }
