@@ -110,6 +110,14 @@ window.addEventListener('load', async () => {
             saveIdea(item);
             animateLikeButton(likeButton);
         });
+        const exploreButton = card.querySelector('.explore-button');
+        exploreButton.addEventListener('click', () => {
+            exploreButton.style.display = 'none';
+            const description = document.createElement('p');
+            description.className = 'text-gray-700 mt-4';
+            description.textContent = item.description;
+            card.appendChild(description);
+        });
         ideasList.appendChild(card);
       });
 
