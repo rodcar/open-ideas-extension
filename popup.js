@@ -4,6 +4,10 @@ function extractLastPathSegment(url) {
     return match ? match[1] : null;  // Return the extracted segment or null if no match
 }
 
+function highlightCapsWords(text) {
+    return text.replace(/\b([A-Z_]+)\b/g, '<span class="text-red-500 font-medium font-mono">$1</span>');
+}
+
 window.addEventListener('load', async () => {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     const url = encodeURIComponent(tab.url);
@@ -30,7 +34,7 @@ window.addEventListener('load', async () => {
           <h2 class="text-lg font-semibold mb-2"><i class="fa-solid ${item.type}"></i> ${item.title}</h2>
           <p class="text-gray-700 mb-2">${item.description}</p>
           <p class="text-gray-700"><strong>Técnica:</strong> ${item.technique}</p>
-          <p class="text-gray-700"><strong>Columnas:</strong> ${item.columns}</p>
+          <p class="text-gray-700"><strong>Columnas:</strong> ${highlightCapsWords(item.columns)}</p>
         `;
         ideasList.appendChild(card);
       });
