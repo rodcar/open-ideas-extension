@@ -99,6 +99,11 @@ window.addEventListener('load', async () => {
           <button class="like-button absolute top-2 right-2 border border-gray-500 text-gray-500 w-10 h-10 rounded-full flex items-center justify-center">
             <i class="fa-solid fa-thumbs-up"></i>
           </button>
+          <div class="flex justify-center mt-4">
+            <button class="explore-button border border-blue-500 text-blue-500 py-2 px-4 rounded-full flex items-center">
+                <i class="fa-solid fa-magnifying-glass mr-2"></i> Explora esta idea
+            </button>
+          </div>
         `;
         const likeButton = card.querySelector('.like-button');
         likeButton.addEventListener('click', () => {
