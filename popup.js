@@ -69,6 +69,10 @@ function animateLikeButton(button) {
     }, 500); // Duration of the animation
 }
 
+function animateDescription(description) {
+    description.classList.add('animate-description');
+}
+
 window.addEventListener('load', async () => {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     const url = encodeURIComponent(tab.url);
@@ -113,10 +117,15 @@ window.addEventListener('load', async () => {
         const exploreButton = card.querySelector('.explore-button');
         exploreButton.addEventListener('click', () => {
             exploreButton.style.display = 'none';
+            const explorationHeading = document.createElement('h3');
+            explorationHeading.className = 'text-blue-500 font-bold flex items-center text-sm';
+            explorationHeading.innerHTML = '<i class="fa-solid fa-magnifying-glass mr-2"></i> Exploración';
             const description = document.createElement('p');
-            description.className = 'text-gray-700 mt-4';
+            description.className = 'text-gray-700 mt-2';
             description.textContent = item.description;
+            card.appendChild(explorationHeading);
             card.appendChild(description);
+            animateDescription(description);
         });
         ideasList.appendChild(card);
       });

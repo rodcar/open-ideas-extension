@@ -31,6 +31,17 @@ body {
     }
 }
 
+  @keyframes description-animation {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
   .animate-expand {
     animation: expandText 1s ease-in-out forwards;
     overflow: hidden;
@@ -45,6 +56,10 @@ body {
 
   .animate-like {
     animation: like-animation 0.5s ease-in-out;
+}
+
+  .animate-description {
+    animation: description-animation 0.5s ease-in-out;
 }
 
   .animate-expand.delay-1 {
