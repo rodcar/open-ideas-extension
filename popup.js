@@ -14,20 +14,31 @@ function saveIdea(idea) {
     localStorage.setItem('savedIdeas', JSON.stringify(savedIdeas));
 }
 
+function deleteIdea(index) {
+    let savedIdeas = JSON.parse(localStorage.getItem('savedIdeas')) || [];
+    savedIdeas.splice(index, 1);
+    localStorage.setItem('savedIdeas', JSON.stringify(savedIdeas));
+    loadSavedIdeas();
+}
+
 function loadSavedIdeas() {
     const savedIdeas = JSON.parse(localStorage.getItem('savedIdeas')) || [];
     const ideasList = document.getElementById('ideasList');
     ideasList.innerHTML = '';
 
-    savedIdeas.forEach(item => {
+    savedIdeas.forEach((item, index) => {
         const card = document.createElement('div');
-        card.className = 'p-4 bg-white rounded shadow';
+        card.className = 'p-4 bg-white rounded shadow relative';
         card.innerHTML = `
             <h2 class="text-lg font-semibold mb-2"><i class="fa-solid ${item.type}"></i> ${item.title}</h2>
             <p class="text-gray-700 mb-2">${item.description}</p>
             <p class="text-gray-700"><strong>Técnica:</strong> ${item.technique}</p>
             <p class="text-gray-700"><strong>Columnas:</strong> ${highlightCapsWords(item.columns)}</p>
+            <button class="delete-button absolute top-2 right-2 border border-red-500 text-red-500 w-10 h-10 rounded-full flex items-center justify-center">
+                <i class="fa-solid fa-trash"></i>
+            </button>
         `;
+        card.querySelector('.delete-button').addEventListener('click', () => deleteIdea(index));
         ideasList.appendChild(card);
     });
 }
