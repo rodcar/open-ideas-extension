@@ -123,10 +123,10 @@ window.addEventListener('load', async () => {
             const description = document.createElement('div');
             description.className = 'text-gray-700 mt-2';
             description.innerHTML = `
-                <p class="md-2"><strong class="text-blue-500"><i class="fa-solid fa-lightbulb mr-2"></i>Ideas creativas:</strong> ${item.description}</p>
-                <p class="md-2"><strong class="text-blue-500"><i class="fa-solid fa-chart-line mr-2"></i>Impacto:</strong> Additional paragraph 1</p>
-                <p class="md-2"><strong class="text-blue-500"><i class="fa-solid fa-expand-arrows-alt mr-2"></i>Escalabilidad:</strong> Additional paragraph 2</p>
-                <p class="md-2"><strong class="text-blue-500"><i class="fa-solid fa-check-circle mr-2"></i>Viabilidad:</strong> Additional paragraph 3</p>
+                <p class="mb-2"><strong class="text-blue-500"><i class="fa-solid fa-lightbulb mr-2"></i>Ideas creativas:</strong> ${item.more_ideas}</p>
+                <p class="mb-2"><strong class="text-blue-500"><i class="fa-solid fa-chart-line mr-2"></i>Impacto:</strong> ${item.impact}</p>
+                <p class="mb-2"><strong class="text-blue-500"><i class="fa-solid fa-expand-arrows-alt mr-2"></i>Escalabilidad:</strong> ${item.scalability}</p>
+                <p><strong class="text-blue-500"><i class="fa-solid fa-check-circle mr-2"></i>Viabilidad:</strong> Additional ${item.viability}</p>
             `;
             card.appendChild(explorationHeading);
             card.appendChild(description);
