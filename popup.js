@@ -18,18 +18,22 @@ window.addEventListener('load', async () => {
       resultElement.textContent = data.complementary_info;
       console.log(data);
 
-      // Create a card element to display the data
-      const card = document.createElement('div');
-      card.className = 'p-4 bg-white rounded shadow';
-      card.innerHTML = `
-          <h2 class="text-lg font-semibold mb-2"><i class="fa-solid fa-gauge"></i> ${data.title}</h2>
-          <p class="text-gray-700 mb-2">${data.description}</p>
-          <p class="text-gray-700"><strong>Técnica:</strong> ${data.technique}</p>
-          <p class="text-gray-700"><strong>Columnas:</strong> ${data.columns}</p>
-      `;
+      // Clear the existing ideas list
+      const ideasList = document.getElementById('ideasList');
+      ideasList.innerHTML = '';
 
-      // Append the card to the ideasList
-      document.getElementById('ideasList').appendChild(card);
+      // Iterate over the data list and create a card for each item
+      data.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'p-4 bg-white rounded shadow';
+        card.innerHTML = `
+          <h2 class="text-lg font-semibold mb-2"><i class="fa-solid ${item.type}"></i> ${item.title}</h2>
+          <p class="text-gray-700 mb-2">${item.description}</p>
+          <p class="text-gray-700"><strong>Técnica:</strong> ${item.technique}</p>
+          <p class="text-gray-700"><strong>Columnas:</strong> ${item.columns}</p>
+        `;
+        ideasList.appendChild(card);
+      });
 
       // Hide the skeleton loading card
       document.querySelector('.animate-pulse').style.display = 'none';
@@ -37,8 +41,4 @@ window.addEventListener('load', async () => {
       //console.error('Failed to fetch data:', error);
       document.getElementById('result').textContent = 'Failed to load data';
     }
-    //fa-mobile-screen
-    //<i class="fa-solid fa-brain"></i>
-    //<i class="fa-solid fa-chart-line"></i>
-    //<i class="fa-solid fa-gauge"></i>
 });
