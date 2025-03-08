@@ -118,11 +118,16 @@ window.addEventListener('load', async () => {
         exploreButton.addEventListener('click', () => {
             exploreButton.style.display = 'none';
             const explorationHeading = document.createElement('h3');
-            explorationHeading.className = 'text-blue-500 font-bold flex items-center text-sm';
+            explorationHeading.className = 'text-blue-500 font-bold flex items-center text-base';
             explorationHeading.innerHTML = '<i class="fa-solid fa-magnifying-glass mr-2"></i> Exploración';
-            const description = document.createElement('p');
+            const description = document.createElement('div');
             description.className = 'text-gray-700 mt-2';
-            description.textContent = item.description;
+            description.innerHTML = `
+                <p class="md-2"><strong class="text-blue-500"><i class="fa-solid fa-lightbulb mr-2"></i>Ideas creativas:</strong> ${item.description}</p>
+                <p class="md-2"><strong class="text-blue-500"><i class="fa-solid fa-chart-line mr-2"></i>Impacto:</strong> Additional paragraph 1</p>
+                <p class="md-2"><strong class="text-blue-500"><i class="fa-solid fa-expand-arrows-alt mr-2"></i>Escalabilidad:</strong> Additional paragraph 2</p>
+                <p class="md-2"><strong class="text-blue-500"><i class="fa-solid fa-check-circle mr-2"></i>Viabilidad:</strong> Additional paragraph 3</p>
+            `;
             card.appendChild(explorationHeading);
             card.appendChild(description);
             animateDescription(description);
