@@ -43,3 +43,8 @@ body {
     animation-delay: 0.4s;
     width: 0.87ch;
   }
+
+
+  #showSavedIdeas {
+    top: -5px;
+  }

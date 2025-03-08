@@ -9,13 +9,16 @@
   </head>
   <body class="bg-gray-100 p-4">
     <!--<h1 class="text-xl font-bold mb-4">Ideasabiertas</h1>-->
-    <div class="flex justify-center items-center">
-      <h1 class="text-xl font-bold mb-4 animate-expand delay-1">
-        ideas
-      </h1>
-      <h1 class="text-xl font-bold mb-4 animate-expand-2 delay-1">
-        abiertas
-      </h1>
+    <div class="relative">
+      <button id="showSavedIdeas" class="bg-green-500 text-white w-10 h-10 rounded-full flex items-center justify-center absolute top-0 right-2">
+        <i class="fa-solid fa-archive"></i>
+      </button>
+    </div>
+    <div class="flex justify-center items-center mb-4">
+      <div class="flex justify-center items-center">
+        <h1 class="text-xl font-bold animate-expand delay-1">ideas</h1>
+        <h1 class="text-xl font-bold animate-expand-2 delay-1">abiertas</h1>
+      </div>
     </div>
     
     <div id="ideasList" class="space-y-2">

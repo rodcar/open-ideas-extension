@@ -8,6 +8,30 @@ function highlightCapsWords(text) {
     return text.replace(/\b([A-Z_]+)\b/g, '<span class="text-red-500 font-medium font-mono">$1</span>');
 }
 
+function saveIdea(idea) {
+    let savedIdeas = JSON.parse(localStorage.getItem('savedIdeas')) || [];
+    savedIdeas.push(idea);
+    localStorage.setItem('savedIdeas', JSON.stringify(savedIdeas));
+}
+
+function loadSavedIdeas() {
+    const savedIdeas = JSON.parse(localStorage.getItem('savedIdeas')) || [];
+    const ideasList = document.getElementById('ideasList');
+    ideasList.innerHTML = '';
+
+    savedIdeas.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'p-4 bg-white rounded shadow';
+        card.innerHTML = `
+            <h2 class="text-lg font-semibold mb-2"><i class="fa-solid ${item.type}"></i> ${item.title}</h2>
+            <p class="text-gray-700 mb-2">${item.description}</p>
+            <p class="text-gray-700"><strong>Técnica:</strong> ${item.technique}</p>
+            <p class="text-gray-700"><strong>Columnas:</strong> ${highlightCapsWords(item.columns)}</p>
+        `;
+        ideasList.appendChild(card);
+    });
+}
+
 window.addEventListener('load', async () => {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     const url = encodeURIComponent(tab.url);
@@ -29,13 +53,17 @@ window.addEventListener('load', async () => {
       // Iterate over the data list and create a card for each item
       data.forEach(item => {
         const card = document.createElement('div');
-        card.className = 'p-4 bg-white rounded shadow';
+        card.className = 'p-4 bg-white rounded shadow relative';
         card.innerHTML = `
           <h2 class="text-lg font-semibold mb-2"><i class="fa-solid ${item.type}"></i> ${item.title}</h2>
           <p class="text-gray-700 mb-2">${item.description}</p>
-          <p class="text-gray-700"><strong>Técnica:</strong> ${item.technique}</p>
-          <p class="text-gray-700"><strong>Columnas:</strong> ${highlightCapsWords(item.columns)}</p>
+          <p class="text-gray-700 mb-2"><strong>Técnica:</strong> ${item.technique}</p>
+          <p class="text-gray-700 mb-2"><strong>Columnas:</strong> ${highlightCapsWords(item.columns)}</p>
+          <button class="like-button absolute top-2 right-2 bg-blue-500 text-white w-10 h-10 rounded-full flex items-center justify-center">
+            <i class="fa-solid fa-thumbs-up"></i>
+          </button>
         `;
+        card.querySelector('.like-button').addEventListener('click', () => saveIdea(item));
         ideasList.appendChild(card);
       });
 
@@ -46,3 +74,5 @@ window.addEventListener('load', async () => {
       document.getElementById('result').textContent = 'Failed to load data';
     }
 });
+
+document.getElementById('showSavedIdeas').addEventListener('click', loadSavedIdeas);
