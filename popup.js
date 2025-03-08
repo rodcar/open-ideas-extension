@@ -32,6 +32,25 @@ function loadSavedIdeas() {
     });
 }
 
+let showingSavedIdeas = false;
+
+function toggleSavedIdeas() {
+    const showSavedIdeasButton = document.getElementById('showSavedIdeas');
+    if (showingSavedIdeas) {
+        loadCurrentIdeas();
+        showSavedIdeasButton.innerHTML = '<i class="fa-solid fa-archive"></i>';
+    } else {
+        loadSavedIdeas();
+        showSavedIdeasButton.innerHTML = '<i class="fa-solid fa-arrow-left"></i>';
+    }
+    showingSavedIdeas = !showingSavedIdeas;
+}
+
+function loadCurrentIdeas() {
+    // Re-fetch and display the current ideas
+    window.dispatchEvent(new Event('load'));
+}
+
 window.addEventListener('load', async () => {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     const url = encodeURIComponent(tab.url);
@@ -75,4 +94,4 @@ window.addEventListener('load', async () => {
     }
 });
 
-document.getElementById('showSavedIdeas').addEventListener('click', loadSavedIdeas);
+document.getElementById('showSavedIdeas').addEventListener('click', toggleSavedIdeas);
