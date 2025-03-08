@@ -1,0 +1,45 @@
+body {
+    width: 500px;
+    margin: 0;
+    padding: 0;
+}
+
+@keyframes expandText {
+    0% {
+      width: 0.4ch;
+    }
+    100% {
+      width: 3.8ch;
+    }
+  }
+
+  @keyframes expandText2 {
+    0% {
+      width: 0.87ch;
+    }
+    100% {
+      width: 6ch;
+    }
+  }
+
+  .animate-expand {
+    animation: expandText 1s ease-in-out forwards;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .animate-expand-2 {
+    animation: expandText2 1s ease-in-out forwards;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .animate-expand.delay-1 {
+    animation-delay: 0.7s;
+    width: 0.4ch;
+  }
+
+  .animate-expand-2.delay-1 {
+    animation-delay: 0.7s;
+    width: 0.87ch;
+  }
