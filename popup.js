@@ -26,6 +26,9 @@ function loadSavedIdeas() {
     const ideasList = document.getElementById('ideasList');
     ideasList.innerHTML = '';
 
+    // Reverse the savedIdeas array to show the most recently saved ideas first
+    savedIdeas.reverse();
+
     savedIdeas.forEach((item, index) => {
         const card = document.createElement('div');
         card.className = 'p-4 bg-white rounded shadow relative';
