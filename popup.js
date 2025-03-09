@@ -125,12 +125,16 @@ window.addEventListener('load', async () => {
               explorationHeading.innerHTML = '<i class="fa-solid fa-magnifying-glass mr-2"></i> Exploración';
               const description = document.createElement('div');
               description.className = 'text-gray-700 mt-2';
-              description.innerHTML = `
-                  <p class="mb-2"><strong class="text-blue-500"><i class="fa-solid fa-lightbulb mr-2"></i>Ideas creativas:</strong> ${item.more_ideas}</p>
-                  <p class="mb-2"><strong class="text-blue-500"><i class="fa-solid fa-chart-line mr-2"></i>Impacto:</strong> ${item.impact}</p>
-                  <p class="mb-2"><strong class="text-blue-500"><i class="fa-solid fa-expand-arrows-alt mr-2"></i>Escalabilidad:</strong> ${item.scalability}</p>
-                  <p><strong class="text-blue-500"><i class="fa-solid fa-check-circle mr-2"></i>Viabilidad:</strong> Additional ${item.viability}</p>
-              `;
+              if (item.more_ideas && item.impact && item.scalability && item.viability) {
+                  description.innerHTML = `
+                      <p class="mb-2"><strong class="text-blue-500"><i class="fa-solid fa-lightbulb mr-2"></i>Ideas creativas:</strong> ${item.more_ideas}</p>
+                      <p class="mb-2"><strong class="text-blue-500"><i class="fa-solid fa-chart-line mr-2"></i>Impacto:</strong> ${item.impact}</p>
+                      <p class="mb-2"><strong class="text-blue-500"><i class="fa-solid fa-expand-arrows-alt mr-2"></i>Escalabilidad:</strong> ${item.scalability}</p>
+                      <p><strong class="text-blue-500"><i class="fa-solid fa-check-circle mr-2"></i>Viabilidad:</strong> ${item.viability}</p>
+                  `;
+              } else {
+                  description.innerHTML = '<p class="text-gray-700">Lo sentimos, aún no se ha explorar esta idea.</p>';
+              }
               card.appendChild(explorationHeading);
               card.appendChild(description);
               animateDescription(description);

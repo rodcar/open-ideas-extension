@@ -16,7 +16,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
             }
         })
         .catch(error => {
-            console.error('Failed to fetch data:', error);
+            //console.error('Failed to fetch data:', error);
         });
     }
 });
