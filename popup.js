@@ -30,7 +30,7 @@ function loadSavedIdeas() {
         const card = document.createElement('div');
         card.className = 'p-4 bg-white rounded shadow relative';
         card.innerHTML = `
-            <h2 class="text-lg font-semibold mb-2"><i class="fa-solid ${item.type}"></i> ${item.title}</h2>
+            <h2 class="text-lg font-semibold mb-2 pr-12"><i class="fa-solid ${item.type}"></i> ${item.title}</h2>
             <p class="text-gray-700 mb-2">${item.description}</p>
             <p class="text-gray-700"><strong>Técnica:</strong> ${item.technique}</p>
             <p class="text-gray-700"><strong>Columnas:</strong> ${highlightCapsWords(item.columns)}</p>
@@ -99,7 +99,7 @@ window.addEventListener('load', async () => {
           const card = document.createElement('div');
           card.className = 'p-4 bg-white rounded shadow relative';
           card.innerHTML = `
-            <h2 class="text-lg font-semibold mb-2"><i class="fa-solid ${item.type}"></i> ${item.title}</h2>
+            <h2 class="text-lg font-semibold mb-2 pr-12"><i class="fa-solid ${item.type}"></i> ${item.title}</h2>
             <p class="text-gray-700 mb-2">${item.description}</p>
             <p class="text-gray-700 mb-2"><strong>Técnica:</strong> ${item.technique}</p>
             <p class="text-gray-700 mb-2"><strong>Columnas:</strong> ${highlightCapsWords(item.columns)}</p>
