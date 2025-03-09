@@ -30,15 +30,46 @@ function loadSavedIdeas() {
         const card = document.createElement('div');
         card.className = 'p-4 bg-white rounded shadow relative';
         card.innerHTML = `
-            <h2 class="text-lg font-semibold mb-2 pr-12"><i class="fa-solid ${item.type}"></i> ${item.title}</h2>
+            <h2 class="text-lg font-semibold mb-2" style="padding-right: 3rem;"><i class="fa-solid ${item.type}"></i> ${item.title}</h2>
             <p class="text-gray-700 mb-2">${item.description}</p>
             <p class="text-gray-700"><strong>Técnica:</strong> ${item.technique}</p>
             <p class="text-gray-700"><strong>Columnas:</strong> ${highlightCapsWords(item.columns)}</p>
+            <div class="absolute top-2 right-2 flex space-x-2">
+                <div class="relative">
+                    <button class="dropdown-button border border-gray-400 text-gray-400 w-10 h-10 rounded-full flex items-center justify-center">
+                        <i class="fa-solid fa-ellipsis-v"></i>
+                    </button>
+                    <div class="dropdown-menu hidden absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-lg">
+                        <button class="like-option block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">Save</button>
+                        <button class="copy-option block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">Copy</button>
+                    </div>
+                </div>
+            </div>
             <button class="delete-button absolute top-2 right-2 border border-red-500 text-red-500 w-10 h-10 rounded-full flex items-center justify-center">
                 <i class="fa-solid fa-trash"></i>
             </button>
         `;
         card.querySelector('.delete-button').addEventListener('click', () => deleteIdea(index));
+        const dropdownButton = card.querySelector('.dropdown-button');
+        const dropdownMenu = card.querySelector('.dropdown-menu');
+        dropdownButton.addEventListener('click', () => {
+            dropdownMenu.classList.toggle('hidden');
+        });
+        card.querySelector('.like-option').addEventListener('click', () => {
+            saveIdea(item);
+            animateLikeButton(dropdownButton);
+            dropdownMenu.classList.add('hidden');
+        });
+        card.querySelector('.copy-option').addEventListener('click', () => {
+            const ideaInfo = `
+                Title: ${item.title}
+                Description: ${item.description}
+                Technique: ${item.technique}
+                Columns: ${item.columns}
+            `;
+            navigator.clipboard.writeText(ideaInfo);
+            dropdownMenu.classList.add('hidden');
+        });
         ideasList.appendChild(card);
     });
 }
@@ -99,23 +130,46 @@ window.addEventListener('load', async () => {
           const card = document.createElement('div');
           card.className = 'p-4 bg-white rounded shadow relative';
           card.innerHTML = `
-            <h2 class="text-lg font-semibold mb-2 pr-12"><i class="fa-solid ${item.type}"></i> ${item.title}</h2>
+            <h2 class="text-lg font-semibold mb-2" style="padding-right: 3rem;"><i class="fa-solid ${item.type}"></i> ${item.title}</h2>
             <p class="text-gray-700 mb-2">${item.description}</p>
             <p class="text-gray-700 mb-2"><strong>Técnica:</strong> ${item.technique}</p>
             <p class="text-gray-700 mb-2"><strong>Columnas:</strong> ${highlightCapsWords(item.columns)}</p>
-            <button class="like-button absolute top-2 right-2 border border-gray-500 text-gray-500 w-10 h-10 rounded-full flex items-center justify-center">
-              <i class="fa-solid fa-thumbs-up"></i>
-            </button>
+            <div class="absolute top-2 right-2 flex space-x-2">
+                <div class="relative">
+                    <button class="dropdown-button border border-gray-400 text-gray-400 w-10 h-10 rounded-full flex items-center justify-center">
+                        <i class="fa-solid fa-ellipsis-v"></i>
+                    </button>
+                    <div class="dropdown-menu hidden absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-lg">
+                        <button class="like-option block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">Save</button>
+                        <button class="copy-option block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">Copy</button>
+                    </div>
+                </div>
+            </div>
             <div class="flex justify-center mt-4">
               <button class="explore-button border border-blue-500 text-blue-500 py-2 px-4 rounded-full flex items-center">
                   <i class="fa-solid fa-magnifying-glass mr-2"></i> Explora esta idea
               </button>
             </div>
           `;
-          const likeButton = card.querySelector('.like-button');
-          likeButton.addEventListener('click', () => {
+          const dropdownButton = card.querySelector('.dropdown-button');
+          const dropdownMenu = card.querySelector('.dropdown-menu');
+          dropdownButton.addEventListener('click', () => {
+              dropdownMenu.classList.toggle('hidden');
+          });
+          card.querySelector('.like-option').addEventListener('click', () => {
               saveIdea(item);
-              animateLikeButton(likeButton);
+              animateLikeButton(dropdownButton);
+              dropdownMenu.classList.add('hidden');
+          });
+          card.querySelector('.copy-option').addEventListener('click', () => {
+              const ideaInfo = `
+                  Title: ${item.title}
+                  Description: ${item.description}
+                  Technique: ${item.technique}
+                  Columns: ${item.columns}
+              `;
+              navigator.clipboard.writeText(ideaInfo);
+              dropdownMenu.classList.add('hidden');
           });
           const exploreButton = card.querySelector('.explore-button');
           exploreButton.addEventListener('click', () => {
