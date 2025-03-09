@@ -91,49 +91,53 @@ window.addEventListener('load', async () => {
       const ideasList = document.getElementById('ideasList');
       ideasList.innerHTML = '';
 
-      // Iterate over the data list and create a card for each item
-      data.forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'p-4 bg-white rounded shadow relative';
-        card.innerHTML = `
-          <h2 class="text-lg font-semibold mb-2"><i class="fa-solid ${item.type}"></i> ${item.title}</h2>
-          <p class="text-gray-700 mb-2">${item.description}</p>
-          <p class="text-gray-700 mb-2"><strong>Técnica:</strong> ${item.technique}</p>
-          <p class="text-gray-700 mb-2"><strong>Columnas:</strong> ${highlightCapsWords(item.columns)}</p>
-          <button class="like-button absolute top-2 right-2 border border-gray-500 text-gray-500 w-10 h-10 rounded-full flex items-center justify-center">
-            <i class="fa-solid fa-thumbs-up"></i>
-          </button>
-          <div class="flex justify-center mt-4">
-            <button class="explore-button border border-blue-500 text-blue-500 py-2 px-4 rounded-full flex items-center">
-                <i class="fa-solid fa-magnifying-glass mr-2"></i> Explora esta idea
+      if (data.length === 0) {
+        ideasList.innerHTML = '<p class="text-gray-700">No data available for this URL.</p>';
+      } else {
+        // Iterate over the data list and create a card for each item
+        data.forEach(item => {
+          const card = document.createElement('div');
+          card.className = 'p-4 bg-white rounded shadow relative';
+          card.innerHTML = `
+            <h2 class="text-lg font-semibold mb-2"><i class="fa-solid ${item.type}"></i> ${item.title}</h2>
+            <p class="text-gray-700 mb-2">${item.description}</p>
+            <p class="text-gray-700 mb-2"><strong>Técnica:</strong> ${item.technique}</p>
+            <p class="text-gray-700 mb-2"><strong>Columnas:</strong> ${highlightCapsWords(item.columns)}</p>
+            <button class="like-button absolute top-2 right-2 border border-gray-500 text-gray-500 w-10 h-10 rounded-full flex items-center justify-center">
+              <i class="fa-solid fa-thumbs-up"></i>
             </button>
-          </div>
-        `;
-        const likeButton = card.querySelector('.like-button');
-        likeButton.addEventListener('click', () => {
-            saveIdea(item);
-            animateLikeButton(likeButton);
+            <div class="flex justify-center mt-4">
+              <button class="explore-button border border-blue-500 text-blue-500 py-2 px-4 rounded-full flex items-center">
+                  <i class="fa-solid fa-magnifying-glass mr-2"></i> Explora esta idea
+              </button>
+            </div>
+          `;
+          const likeButton = card.querySelector('.like-button');
+          likeButton.addEventListener('click', () => {
+              saveIdea(item);
+              animateLikeButton(likeButton);
+          });
+          const exploreButton = card.querySelector('.explore-button');
+          exploreButton.addEventListener('click', () => {
+              exploreButton.style.display = 'none';
+              const explorationHeading = document.createElement('h3');
+              explorationHeading.className = 'text-blue-500 font-bold flex items-center text-base';
+              explorationHeading.innerHTML = '<i class="fa-solid fa-magnifying-glass mr-2"></i> Exploración';
+              const description = document.createElement('div');
+              description.className = 'text-gray-700 mt-2';
+              description.innerHTML = `
+                  <p class="mb-2"><strong class="text-blue-500"><i class="fa-solid fa-lightbulb mr-2"></i>Ideas creativas:</strong> ${item.more_ideas}</p>
+                  <p class="mb-2"><strong class="text-blue-500"><i class="fa-solid fa-chart-line mr-2"></i>Impacto:</strong> ${item.impact}</p>
+                  <p class="mb-2"><strong class="text-blue-500"><i class="fa-solid fa-expand-arrows-alt mr-2"></i>Escalabilidad:</strong> ${item.scalability}</p>
+                  <p><strong class="text-blue-500"><i class="fa-solid fa-check-circle mr-2"></i>Viabilidad:</strong> Additional ${item.viability}</p>
+              `;
+              card.appendChild(explorationHeading);
+              card.appendChild(description);
+              animateDescription(description);
+          });
+          ideasList.appendChild(card);
         });
-        const exploreButton = card.querySelector('.explore-button');
-        exploreButton.addEventListener('click', () => {
-            exploreButton.style.display = 'none';
-            const explorationHeading = document.createElement('h3');
-            explorationHeading.className = 'text-blue-500 font-bold flex items-center text-base';
-            explorationHeading.innerHTML = '<i class="fa-solid fa-magnifying-glass mr-2"></i> Exploración';
-            const description = document.createElement('div');
-            description.className = 'text-gray-700 mt-2';
-            description.innerHTML = `
-                <p class="mb-2"><strong class="text-blue-500"><i class="fa-solid fa-lightbulb mr-2"></i>Ideas creativas:</strong> ${item.more_ideas}</p>
-                <p class="mb-2"><strong class="text-blue-500"><i class="fa-solid fa-chart-line mr-2"></i>Impacto:</strong> ${item.impact}</p>
-                <p class="mb-2"><strong class="text-blue-500"><i class="fa-solid fa-expand-arrows-alt mr-2"></i>Escalabilidad:</strong> ${item.scalability}</p>
-                <p><strong class="text-blue-500"><i class="fa-solid fa-check-circle mr-2"></i>Viabilidad:</strong> Additional ${item.viability}</p>
-            `;
-            card.appendChild(explorationHeading);
-            card.appendChild(description);
-            animateDescription(description);
-        });
-        ideasList.appendChild(card);
-      });
+      }
 
       // Hide the skeleton loading card
       document.querySelector('.animate-pulse').style.display = 'none';
