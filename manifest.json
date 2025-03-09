@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
-    "name": "My Basic Extension",
+    "name": "Ideas Abiertas",
     "version": "1.0",
-    "description": "A simple Chrome extension",
+    "description": "Una extensión para complementar la plataforma de datos abierto con ideas generadas por AI",
     "permissions": ["activeTab", "tabs"],
     "action": {
       "default_popup": "popup.html",
