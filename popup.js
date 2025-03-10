@@ -43,8 +43,8 @@ function loadSavedIdeas() {
                         <i class="fa-solid fa-ellipsis-v"></i>
                     </button>
                     <div class="dropdown-menu hidden absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-lg">
-                        <button class="like-option block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">Save</button>
-                        <button class="copy-option block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">Copy</button>
+                        <button class="like-option block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">Guardar</button>
+                        <button class="copy-option block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">Copiar</button>
                     </div>
                 </div>
             </div>
@@ -143,8 +143,8 @@ window.addEventListener('load', async () => {
                         <i class="fa-solid fa-ellipsis-v"></i>
                     </button>
                     <div class="dropdown-menu hidden absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-lg">
-                        <button class="like-option block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">Save</button>
-                        <button class="copy-option block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">Copy</button>
+                        <button class="like-option block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">Guardar</button>
+                        <button class="copy-option block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">Copiar</button>
                     </div>
                 </div>
             </div>
@@ -182,9 +182,9 @@ window.addEventListener('load', async () => {
               explorationHeading.innerHTML = '<i class="fa-solid fa-magnifying-glass mr-2"></i> Exploración';
               const description = document.createElement('div');
               description.className = 'text-gray-700 mt-2';
-              if (item.more_ideas && item.impact && item.scalability && item.viability) {
+              if (item.complement_idea && item.impact && item.scalability && item.viability) {
                   description.innerHTML = `
-                      <p class="mb-2"><strong class="text-blue-500"><i class="fa-solid fa-lightbulb mr-2"></i>Ideas creativas:</strong> ${item.more_ideas}</p>
+                      <p class="mb-2"><strong class="text-blue-500"><i class="fa-solid fa-lightbulb mr-2"></i>Ideas creativas:</strong> ${item.complement_idea}</p>
                       <p class="mb-2"><strong class="text-blue-500"><i class="fa-solid fa-chart-line mr-2"></i>Impacto:</strong> ${item.impact}</p>
                       <p class="mb-2"><strong class="text-blue-500"><i class="fa-solid fa-expand-arrows-alt mr-2"></i>Escalabilidad:</strong> ${item.scalability}</p>
                       <p><strong class="text-blue-500"><i class="fa-solid fa-check-circle mr-2"></i>Viabilidad:</strong> ${item.viability}</p>
