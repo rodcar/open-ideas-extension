@@ -26,6 +26,10 @@ function loadSavedIdeas() {
     const ideasList = document.getElementById('ideasList');
     ideasList.innerHTML = '';
 
+    if (savedIdeas.length === 0) {
+        ideasList.innerHTML = '<p class="text-gray-700 text-center">Revisa tus ideas guardadas aquí.</p>';
+    }
+
     // Reverse the savedIdeas array to show the most recently saved ideas first
     savedIdeas.reverse();
 
