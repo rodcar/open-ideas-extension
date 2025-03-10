@@ -107,6 +107,43 @@ function animateDescription(description) {
     description.classList.add('animate-description');
 }
 
+function formatText(text) {
+    let htmlOutput = "";
+    let inList = false;
+    const lines = text.split("\n");
+  
+    for (const line of lines) {
+      const trimmedLine = line.trim(); // Remove leading/trailing whitespace
+  
+      if (trimmedLine.startsWith("* ")) {
+        if (!inList) {
+          htmlOutput += "<ul class=\"list-disc list-inside mb-2\">\n"; // Start a new list
+          inList = true;
+        }
+  
+        let listItemText = trimmedLine.substring(2); // Remove "* " prefix
+        listItemText = listItemText.replace(/\*\*(.*?)\*\*/g, "<b>$1</b>"); // Bold
+        htmlOutput += `  <li>${listItemText}</li>\n`;
+      } else {
+        if (inList) {
+          htmlOutput += "</ul>\n"; // Close the list
+          inList = false;
+        }
+  
+        // Non-list item line, also apply bold formatting
+        const boldedLine = trimmedLine.replace(/\*\*(.*?)\*\*/g, "<b>$1</b>"); // Bold
+        htmlOutput += boldedLine + "\n";
+      }
+    }
+  
+    // Close the list if it's still open at the end
+    if (inList) {
+      htmlOutput += "</ul>\n";
+    }
+  
+    return htmlOutput;
+  }
+
 window.addEventListener('load', async () => {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     const url = encodeURIComponent(tab.url);
@@ -184,10 +221,10 @@ window.addEventListener('load', async () => {
               description.className = 'text-gray-700 mt-2';
               if (item.complement_idea && item.impact && item.scalability && item.viability) {
                   description.innerHTML = `
-                      <p class="mb-2"><strong class="text-blue-500"><i class="fa-solid fa-lightbulb mr-2"></i>Ideas creativas:</strong> ${item.complement_idea}</p>
-                      <p class="mb-2"><strong class="text-blue-500"><i class="fa-solid fa-chart-line mr-2"></i>Impacto:</strong> ${item.impact}</p>
-                      <p class="mb-2"><strong class="text-blue-500"><i class="fa-solid fa-expand-arrows-alt mr-2"></i>Escalabilidad:</strong> ${item.scalability}</p>
-                      <p><strong class="text-blue-500"><i class="fa-solid fa-check-circle mr-2"></i>Viabilidad:</strong> ${item.viability}</p>
+                      <p class="mb-2"><strong class="text-blue-500"><i class="fa-solid fa-lightbulb mr-2"></i>Ideas creativas:</strong> ${formatText(item.complement_idea)}</p>
+                      <p class="mb-2"><strong class="text-blue-500"><i class="fa-solid fa-chart-line mr-2"></i>Impacto:</strong> ${formatText(item.impact)}</p>
+                      <p class="mb-2"><strong class="text-blue-500"><i class="fa-solid fa-expand-arrows-alt mr-2"></i>Escalabilidad:</strong> ${formatText(item.scalability)}</p>
+                      <p><strong class="text-blue-500"><i class="fa-solid fa-check-circle mr-2"></i>Viabilidad:</strong> ${formatText(item.viability)}</p>
                   `;
               } else {
                   description.innerHTML = '<p class="text-gray-700">Lo sentimos, aún no se ha explorar esta idea.</p>';
