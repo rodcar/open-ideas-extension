@@ -245,7 +245,7 @@ window.addEventListener('load', async () => {
       document.querySelector('.animate-pulse').style.display = 'none';
     } catch (error) {
       //console.error('Failed to fetch data:', error);
-      document.getElementById('result').textContent = 'Failed to load data';
+      //document.getElementById('result').textContent = 'Failed to load data';
     }
 });
 
