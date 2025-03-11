@@ -151,9 +151,8 @@ function formatText(text) {
 window.addEventListener('load', async () => {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     const url = encodeURIComponent(tab.url);
-  
+    
     try {
-      //const response = await fetch(`https://example.com/data?url=${url}`);
       const response = await fetch(`https://rodcar.github.io/open-ideas/json/${extractLastPathSegment(tab.url)}.json`, {
         cache: 'no-store'
       });

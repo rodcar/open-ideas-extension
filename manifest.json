@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "Ideas Abiertas",
     "version": "1.0",
-    "description": "Ideas Abiertas es una extensión que integra ideas generadas por IA en la Plataforma Nacional de Datos Abiertos (PNDA) del Perú",
+    "description": "Ideas Abiertas es una extensión que lista ideas en la Plataforma Nacional de Datos Abiertos (PNDA) del Perú",
     "permissions": ["activeTab", "tabs"],
     "action": {
       "default_popup": "popup.html",
